@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 50th Birthday Mom!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background: #000; color: white; overflow-x: hidden; scroll-behavior: smooth; }
+        section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; position: relative; }
+        .gold-text { color: #D4AF37; font-family: 'Dancing Script', cursive; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        p { font-size: 1.2rem; max-width: 600px; line-height: 1.6; }
+        .btn { background: #D4AF37; color: black; border: none; padding: 15px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px; transition: transform 0.2s; z-index: 10; }
+        .btn:hover { background: #F9E2AF; }
+        #noBtn, #abroadBtn { position: absolute; transition: all 0.2s ease; background: #333; color: white; }
+        .hidden { display: none !important; }
+        .star-container { font-size: 3rem; cursor: pointer; margin: 20px; }
+        .star { color: #444; transition: color 0.3s; }
+        .star:hover { color: #D4AF37; }
+        .card { border: 2px solid #D4AF37; padding: 30px; border-radius: 15px; margin: 20px; background: rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body>
+
+    <section id="home">
+        <h1 class="gold-text">Happy 50th Birthday</h1>
+        <h2 style="letter-spacing: 5px; color: #D4AF37;">GOLDEN JUBILEE</h2>
+        <p>To the most incredible Mom on her special day, and a wonderful celebration for Dad too!</p>
+        <p style="font-size: 0.9rem; color: #888; margin-top: 40px;">✨ Scroll down to begin ✨</p>
+    </section>
+
+    <section id="message">
+        <h2 class="gold-text" style="font-size: 2.5rem;">A Message from Our Hearts</h2>
+        <p>
+            Mom, reaching 50 is a beautiful milestone. You are the gold that keeps our family shining. 
+            Your wisdom, love, and kindness have shaped us into who we are today. 
+            We want this year to be the most memorable one yet!
+        </p>
+        <h3 style="margin-top: 40px;">Do you want to celebrate your birthday?</h3>
+        <div style="position: relative; width: 100%; height: 150px; display: flex; justify-content: center; align-items: center;">
+            <button class="btn" onclick="nextSection('travel')">YES!</button>
+            <button id="noBtn" class="btn" onmouseover="moveButton('noBtn')">No</button>
+        </div>
+    </section>
+
+    <section id="travel" class="hidden">
+        <h2 class="gold-text" style="font-size: 2.5rem;">Where should we go?</h2>
+        <p>How do you want to celebrate your birthday?</p>
+        <div style="position: relative; width: 100%; height: 150px; display: flex; justify-content: center; align-items: center;">
+            <button class="btn" onclick="nextSection('quiz')">A Weekend in Poland</button>
+            <button id="abroadBtn" class="btn" onmouseover="moveButton('abroadBtn')">Abroad</button>
+        </div>
+    </section>
+
+    <section id="quiz" class="hidden">
+        <h2 class="gold-text" style="font-size: 2.5rem;">One Last Question...</h2>
+        <p>Which star rating should your hotel be?</p>
+        <div class="star-container">
+            <span class="star" onclick="checkStar(1)">★</span>
+            <span class="star" onclick="checkStar(2)">★</span>
+            <span class="star" onclick="checkStar(3)">★</span>
+            <span class="star" onclick="checkStar(4)">★</span>
+            <span class="star" onclick="checkStar(5)">★</span>
+        </div>
+        <h3 id="quizFeedback" style="min-height: 30px;"></h3>
+    </section>
+
+    <section id="final" class="hidden">
+        <h1 class="gold-text">Congratulations!</h1>
+        <p>You selected the 5-star experience, and you deserve nothing less!</p>
+        <div class="card">
+            <h2 class="gold-text">Happy 50th Birthday Mom & Happy Father's Day Dad!</h2>
+            <p><strong>Hotel:</strong> [Royal Tulip Sand Kolobrzeg]</p>
+            <p><strong>Dates:</strong> [03 Lip 2026 - 05 Lip 2026]</p>
+            <p>Enjoy your time, Mom and Dad. You've worked so hard for us, now it's time to relax, smile, and have a beautiful time together!</p>
+        </div>
+        <p style="font-style: italic; margin-top: 30px; font-size: 1.2rem;">
+            Best regards,<br>
+            <span class="gold-text" style="font-size: 1.8rem;">Julia and Umar</span>
+        </p>
+    </section>
+
+    <script>
+        function moveButton(id) {
+            const btn = document.getElementById(id);
+            const x = Math.random() * (window.innerWidth - 200) + 50;
+            const y = Math.random() * (window.innerHeight - 200) + 50;
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function nextSection(sectionId) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function checkStar(rating) {
+            const feedback = document.getElementById('quizFeedback');
+            if(rating < 5) {
+                feedback.innerHTML = "❌ All wrong answers! Please select again.";
+                feedback.style.color = "red";
+            } else {
+                nextSection('final');
+            }
+        }
+    </script>
+</body>
+</html>
